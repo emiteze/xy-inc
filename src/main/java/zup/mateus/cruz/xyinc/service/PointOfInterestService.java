@@ -25,6 +25,10 @@ public class PointOfInterestService {
         return nearbyPoints;
     }
 
+    public List<PointOfInterest> findPointByName(String name){
+        return repository.findByName(name);
+    }
+
     public void savePoint(PointOfInterest poi){
         repository.save(poi);
     }

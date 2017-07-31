@@ -7,8 +7,6 @@ import java.util.UUID;
 
 public interface PointOfInterestRepository extends MongoRepository<PointOfInterest, UUID> {
 
-    public PointOfInterest findByName(String name);
-    public List<PointOfInterest> findByCoordx(int coordx);
-    public List<PointOfInterest> findByCoordy(int coordy);
+    public List<PointOfInterest> findByName(String name);
 
 }
