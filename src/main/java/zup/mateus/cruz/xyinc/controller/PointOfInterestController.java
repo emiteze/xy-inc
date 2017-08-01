@@ -1,7 +1,6 @@
 package zup.mateus.cruz.xyinc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zup.mateus.cruz.xyinc.model.PointOfInterest;
@@ -16,9 +15,9 @@ public class PointOfInterestController {
     @RequestMapping(value = "/get-points", method = RequestMethod.GET)
     public ResponseEntity<?> getPoints(){
         try {
-            return new ResponseEntity<>(poiService.getPoints(), HttpStatus.OK);
+            return ResponseEntity.ok(poiService.getPoints());
         } catch(Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -26,18 +25,18 @@ public class PointOfInterestController {
     public ResponseEntity<?> getPointsNearby(@RequestParam("coordx") int coordx, @RequestParam("coordy") int coordy, @RequestParam("maxDistance") double maxDistance){
         try {
             PointOfInterest userLocation = new PointOfInterest("User Location", coordx, coordy);
-            return new ResponseEntity<>(poiService.getPointsNearby(userLocation, maxDistance), HttpStatus.OK);
+            return ResponseEntity.ok(poiService.getPointsNearby(userLocation, maxDistance));
         } catch(Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @RequestMapping(value = "/find-points", method = RequestMethod.GET)
     public ResponseEntity<?> getPointsNearby(@RequestParam("name") String name){
         try {
-            return new ResponseEntity<>(poiService.findPointByName(name), HttpStatus.OK);
+            return ResponseEntity.ok(poiService.findPointByName(name));
         } catch(Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -45,9 +44,9 @@ public class PointOfInterestController {
     public ResponseEntity<?> savePoint(@RequestBody PointOfInterest poi){
         try {
             poiService.savePoint(poi);
-            return new ResponseEntity<>(poiService.getPoints(), HttpStatus.OK);
+            return ResponseEntity.ok(poiService.getPoints());
         } catch(Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
     }
 

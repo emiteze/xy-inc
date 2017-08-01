@@ -19,7 +19,7 @@ public class PointOfInterestService {
 
     public List<PointOfInterest> getPointsNearby(PointOfInterest userLocation, double maxDistance){
         List<PointOfInterest> nearbyPoints = new ArrayList<>();
-        for (PointOfInterest poi : repository.findAll()) {
+        for (PointOfInterest poi : this.getPoints()) {
             if(userLocation.distanceBetweenPoints(poi) <= maxDistance) nearbyPoints.add(poi);
         }
         return nearbyPoints;
