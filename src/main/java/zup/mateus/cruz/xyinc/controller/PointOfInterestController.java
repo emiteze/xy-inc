@@ -5,12 +5,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zup.mateus.cruz.xyinc.model.PointOfInterest;
 import zup.mateus.cruz.xyinc.service.PointOfInterestService;
+import java.util.UUID;
 
 @RestController
 public class PointOfInterestController {
 
     @Autowired
     private PointOfInterestService poiService;
+
+    @RequestMapping(value = "/get-point", method = RequestMethod.GET, params = "id")
+    public ResponseEntity<?> findPoint(@RequestParam("id") UUID id){
+        try {
+            return ResponseEntity.ok(poiService.findPointById(id));
+        } catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @RequestMapping(value = "/get-point", method = RequestMethod.GET, params = "name")
+    public ResponseEntity<?> findPoint(@RequestParam("name") String name){
+        try {
+            return ResponseEntity.ok(poiService.findPointsByName(name));
+        } catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
     @RequestMapping(value = "/get-points", method = RequestMethod.GET)
     public ResponseEntity<?> getPoints(){
@@ -31,19 +50,50 @@ public class PointOfInterestController {
         }
     }
 
-    @RequestMapping(value = "/find-points", method = RequestMethod.GET)
-    public ResponseEntity<?> getPointsNearby(@RequestParam("name") String name){
+    @RequestMapping(value = "/save-point", method = RequestMethod.POST)
+    public ResponseEntity<?> savePoint(@RequestBody PointOfInterest poi){
         try {
-            return ResponseEntity.ok(poiService.findPointByName(name));
+            poiService.savePoint(poi);
+            return ResponseEntity.ok(poiService.getPoints());
         } catch(Exception e){
             return ResponseEntity.badRequest().build();
         }
     }
 
-    @RequestMapping(value = "/save-point", method = RequestMethod.POST)
-    public ResponseEntity<?> savePoint(@RequestBody PointOfInterest poi){
+    @RequestMapping(value = "/delete-point", method = RequestMethod.DELETE, params = "id")
+    public ResponseEntity<?> deletePoint(@RequestParam("id") UUID id){
         try {
-            poiService.savePoint(poi);
+            poiService.deleteById(id);
+            return ResponseEntity.ok(poiService.getPoints());
+        } catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @RequestMapping(value = "/delete-point", method = RequestMethod.DELETE, params = "name")
+    public ResponseEntity<?> deletePoint(@RequestParam("name") String name){
+        try {
+            poiService.deleteByName(name);
+            return ResponseEntity.ok(poiService.getPoints());
+        } catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @RequestMapping(value = "/delete-point", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deletePoint(@RequestBody PointOfInterest poi){
+        try {
+            poiService.deleteObject(poi);
+            return ResponseEntity.ok(poiService.getPoints());
+        } catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @RequestMapping(value = "/update-point", method = RequestMethod.PUT)
+    public ResponseEntity<?> updatePoint(@RequestBody PointOfInterest poi){
+        try {
+            poiService.updatePoint(poi);
             return ResponseEntity.ok(poiService.getPoints());
         } catch(Exception e){
             return ResponseEntity.badRequest().build();

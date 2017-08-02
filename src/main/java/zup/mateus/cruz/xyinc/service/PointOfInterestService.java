@@ -6,6 +6,7 @@ import zup.mateus.cruz.xyinc.repository.PointOfInterestRepository;
 import zup.mateus.cruz.xyinc.model.PointOfInterest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PointOfInterestService {
@@ -25,12 +26,31 @@ public class PointOfInterestService {
         return nearbyPoints;
     }
 
-    public List<PointOfInterest> findPointByName(String name){
+    public PointOfInterest findPointById(UUID id){
+        return repository.findOne(id);
+    }
+
+    public List<PointOfInterest> findPointsByName(String name){
         return repository.findByName(name);
+    }
+
+    public void deleteByName(String name){
+        List<PointOfInterest> pointsToBeRemoved = findPointsByName(name);
+        for(PointOfInterest poi : pointsToBeRemoved){
+            repository.delete(poi.getId());
+        }
+    }
+
+    public void deleteObject(PointOfInterest poi) { repository.delete(poi); }
+
+    public void deleteById(UUID id){
+        repository.delete(id);
     }
 
     public void savePoint(PointOfInterest poi){
         repository.save(poi);
     }
+
+    public void updatePoint(PointOfInterest poi){ repository.save(poi); }
 
 }

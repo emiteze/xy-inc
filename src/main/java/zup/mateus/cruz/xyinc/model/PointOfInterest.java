@@ -11,13 +11,13 @@ public class PointOfInterest implements Serializable{
     @Id
     private UUID id = UUID.randomUUID();
 
-    @NotEmpty(message = "O nome do ponto deve ser preenchido")
+    @NotEmpty(message = "Point name must be informed")
     private String name;
 
-    @Min(value = 0, message = "Coordenada X não pode ser negativa")
+    @Min(value = 0, message = "X coordinate can not be negative")
     private int coordx;
 
-    @Min(value = 0, message = "Coordenada Y não pode ser negativa")
+    @Min(value = 0, message = "Y coordinate can not be negative")
     private int coordy;
 
     public PointOfInterest(String name, int coordx, int coordy){

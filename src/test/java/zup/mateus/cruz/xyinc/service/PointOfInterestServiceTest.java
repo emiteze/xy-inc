@@ -3,6 +3,8 @@ package zup.mateus.cruz.xyinc.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+
 import zup.mateus.cruz.xyinc.model.PointOfInterest;
 import zup.mateus.cruz.xyinc.repository.PointOfInterestRepository;
 import org.junit.Assert;
@@ -23,7 +25,7 @@ public class PointOfInterestServiceTest {
     private PointOfInterestService service;
 
     @Test
-    public void getPointsNearby() throws Exception {
+    public void testGetPointsNearbyRetrievingPoints() throws Exception {
         List<PointOfInterest> mockedList = populateMockList();
         PointOfInterest userLocation = new PointOfInterest("User Location", 15,15);
         when(service.getPoints()).thenReturn(mockedList);
@@ -36,6 +38,16 @@ public class PointOfInterestServiceTest {
             Assert.assertEquals(expectedObject.getCoordx(), returnedObject.getCoordx());
             Assert.assertEquals(expectedObject.getCoordy(), returnedObject.getCoordy());
         }
+    }
+
+    @Test
+    public void testGetPointsNearbyNotRetrievingPoints() throws Exception {
+        List<PointOfInterest> mockedList = populateMockList();
+        PointOfInterest userLocation = new PointOfInterest("User Location", 15,15);
+        when(service.getPoints()).thenReturn(mockedList);
+        List<PointOfInterest> returnedList = service.getPointsNearby(userLocation, 1);
+        List<PointOfInterest> expectedList = new ArrayList<>();
+        Assert.assertEquals(returnedList, expectedList);
     }
 
     public List<PointOfInterest> populateMockList(){
