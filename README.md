@@ -76,6 +76,7 @@ Point Of Interest object
     "coordy": 10
 }
 ```
+`PS: All endpoints returns status 200 (ok) if everything goes well and 400 (bad request) if something goes wrong`
 ## Technologies
 
 > Backend
