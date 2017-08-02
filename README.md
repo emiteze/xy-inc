@@ -29,7 +29,7 @@ Example: /get-points-nearby?coordx=15&coordy=15&maxDistance=10
 > 4. POST /save-point
 Saves a Point Of Interest in the database.
 Expected parameter:
-> ```
+```
 Point Of Interest object
 {
     "name": "Place",
@@ -45,7 +45,7 @@ Example: /delete-point?id=5cfd917e-d1c8-48cd-b0a2-072b137cb40a or /delete-point?
 > 6. PUT /update-point
 Update a specific Point Of Interest in the database passing the object with the new values.
 Expeted parameter:
-> ```
+```
 Point Of Interest object
 {
     "id": 5cfd917e-d1c8-48cd-b0a2-072b137cb40a,
