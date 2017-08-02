@@ -80,20 +80,20 @@ Point Of Interest object
 
 > Backend
 > * [SpringBoot](http://projects.spring.io/spring-boot/)
-
+>
 >Database
 > * [MongoDB](https://www.mongodb.org/)
-
+>
 >Testing
 > * [JUnit](http://junit.org/)
 > * [Mockito](http://mockito.org/)
-
+>
 > API Tooling
 > * [Swagger](https://swagger.io/)
-
+>
 > Git Repository
 > * [GitHub](https://github.com/)
-
+>
 > Deploy
 > * [Docker](http://www.docker.com/)
 > * [Docker Compose](http://www.docker.com/products/docker-compose)
