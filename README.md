@@ -29,6 +29,7 @@ Example: /get-points-nearby?coordx=15&coordy=15&maxDistance=10
 > 4. POST /save-point
 Saves a Point Of Interest in the database.
 Expected parameter:
+
 Point Of Interest object
 {
     "name": "Place",
@@ -44,6 +45,7 @@ Example: /delete-point?id=5cfd917e-d1c8-48cd-b0a2-072b137cb40a or /delete-point?
 > 6. PUT /update-point
 Update a specific Point Of Interest in the database passing the object with the new values.
 Expeted parameter:
+
 Point Of Interest object
 {
     "id": 5cfd917e-d1c8-48cd-b0a2-072b137cb40a,
@@ -55,21 +57,21 @@ Point Of Interest object
 ## Technologies
 
 > Backend
-* [SpringBoot](http://projects.spring.io/spring-boot/)
+> * [SpringBoot](http://projects.spring.io/spring-boot/)
 
 >Database
-* [MongoDB](https://www.mongodb.org/)
+> * [MongoDB](https://www.mongodb.org/)
 
 >Testing
-* [JUnit](http://junit.org/)
-* [Mockito](http://mockito.org/)
+> * [JUnit](http://junit.org/)
+> * [Mockito](http://mockito.org/)
 
 > API Tooling
-* [Swagger](https://swagger.io/)
+> * [Swagger](https://swagger.io/)
 
 > Git Repository
-* [GitHub](https://github.com/)
+> * [GitHub](https://github.com/)
 
 > Deploy
-* [Docker](http://www.docker.com/)
-* [Docker Compose](http://www.docker.com/products/docker-compose)
+> * [Docker](http://www.docker.com/)
+> * [Docker Compose](http://www.docker.com/products/docker-compose)
