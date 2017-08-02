@@ -35,6 +35,7 @@ Point Of Interest object
     "coordx": 10,
     "coordy": 10
 }
+
 > 5. DELETE /delete-point
 Delete a specific Point Of Interest if given "id" via query parameter or the object itself via body request, or a list of Point Of Interest if given "name" via query parameter.
 Expected parameters:
