@@ -12,11 +12,11 @@
 > 
 > 3.On the root of the project, run:
 > 
->```
->mongod --dbpath=data/db (this will initiate a mongodb server at localhost:27017)
->mvn dependency:resolve (this will handle the dependencies of the project)
->mvn spring-boot:run (this will start the webservice at localhost:8080)
->```
+> ``` mongod --dbpath=data/db (this will initiate a mongodb server at localhost:27017) ```
+> 
+> ``` mvn dependency:resolve (this will handle the dependencies of the project) ```
+> 
+> ``` mvn spring-boot:run (this will start the webservice at localhost:8080) ```
 > 
 > 4.Open in your browser the URL ` http://localhost:8080/swagger-ui.html `
 
