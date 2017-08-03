@@ -6,7 +6,7 @@
 
 ## Quick Start
 
-> 1.Install [MongoDB](http://gradle.org/gradle-download/), [Java](https://www.java.com/pt_BR/download/) and [Maven](https://maven.apache.org/download.cgi)
+> 1.Install [MongoDB](https://www.mongodb.com/download-center), [Java](https://www.java.com/pt_BR/download/) and [Maven](https://maven.apache.org/download.cgi)
 > 
 > 2.Clone this repository using ` git clone https://github.com/emiteze/xy-inc.git `
 > 
