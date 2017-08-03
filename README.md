@@ -16,6 +16,8 @@
 > 
 > ``` mvn dependency:resolve (this will handle the dependencies of the project) ```
 > 
+> ``` mvn clean install (this will build the project) ```
+>
 > ``` mvn spring-boot:run (this will start the webservice at localhost:8080) ```
 > 
 > 4.Open in your browser the URL ` http://localhost:8080/swagger-ui.html ` to test the webservice or use any HttpClient that you want.
