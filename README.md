@@ -12,6 +12,8 @@
 >
 > 3.On the root of the project, run:
 >
+> ``` mkdir data && mkdir data/db (this create the project database path used by mongo to store data) ```
+>
 > ``` mongod --dbpath=data/db (this will initiate a mongodb server at localhost:27017) ```
 >
 > ``` mvn dependency:resolve (this will handle the dependencies of the project) ```
