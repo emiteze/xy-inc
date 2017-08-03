@@ -18,7 +18,7 @@
 > 
 > ``` mvn spring-boot:run (this will start the webservice at localhost:8080) ```
 > 
-> 4.Open in your browser the URL ` http://localhost:8080/swagger-ui.html `
+> 4.Open in your browser the URL ` http://localhost:8080/swagger-ui.html ` to test the webservice or use any HttpClient that you want.
 
 ## Endpoints
 
@@ -103,7 +103,9 @@ Point Of Interest object
 >
 > Git Repository
 > * [GitHub](https://github.com/)
->
-> Deploy
+
+## Future Improvements
+
+> Dockerize our project to simplify the build and run process to just one line command.
 > * [Docker](http://www.docker.com/)
 > * [Docker Compose](http://www.docker.com/products/docker-compose)
