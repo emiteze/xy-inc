@@ -6,10 +6,21 @@
 
 ## Quick Start
 
-> 1. Install [Compose](http://gradle.org/gradle-download/)
-> 2. Clone this repository using ` git clone https://github.com/emiteze/xy-inc.git `
-> 3. Execute the command ` docker-compose up ` in the root of the project
-> 4. Open in your browser the URL ` http://localhost:8080/swagger-ui.html `
+> 1.Install [MongoDB](http://gradle.org/gradle-download/), [Java](https://www.java.com/pt_BR/download/)
+ and [Maven](https://maven.apache.org/download.cgi)
+
+> 2.Clone this repository using ` git clone https://github.com/emiteze/xy-inc.git `
+
+> 3.On the root of the project, run:
+
+>```
+mongod --dbpath=data/db (this will initiate a mongodb server at localhost:27017)
+mvn dependency:resolve (this will handle the dependencies of the project)
+mvn spring-boot:run ``` (this will start the webservice at localhost:8080)
+```
+
+
+> 4.Open in your browser the URL ` http://localhost:8080/swagger-ui.html `
 
 ## Endpoints
 
