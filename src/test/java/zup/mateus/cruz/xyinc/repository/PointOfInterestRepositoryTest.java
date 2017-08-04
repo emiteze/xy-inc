@@ -19,37 +19,56 @@ public class PointOfInterestRepositoryTest {
     @Autowired
     private PointOfInterestRepository repository;
 
-    private List<PointOfInterest> listOfPOI = new ArrayList<>();
+    private List<PointOfInterest> pointsInRepo = new ArrayList<>();
+    private static List<PointOfInterest> testList = new ArrayList<>();
 
     @Before
     public void deleteDB() {
-        listOfPOI = repository.findAll();
-        repository.deleteAll();
+        pointsInRepo = repository.findAll();
+        deleteInRepoEachPointInList(testList);
     }
 
     @After
     public void restoreDB() {
-        repository.deleteAll();
-        for(PointOfInterest poi : listOfPOI){
+        deleteInRepoEachPointInList(testList);
+        saveInRepoEachPointInList(pointsInRepo);
+    }
+
+    private void saveInRepoEachPointInList(List<PointOfInterest> listOfPoints){
+        for(PointOfInterest poi : listOfPoints){
             repository.save(poi);
+        }
+    }
+
+    private void deleteInRepoEachPointInList(List<PointOfInterest> listOfPoints){
+        for(PointOfInterest poi : listOfPoints){
+            repository.delete(poi);
         }
     }
 
     @Test
     public void testFindAllPopulatedDB() throws Exception {
+
+        List<PointOfInterest> backup = new ArrayList<>();
+        for(PointOfInterest poi : repository.findAll()) backup.add(poi);
+        repository.deleteAll();
+
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
         PointOfInterest pointTwo = new PointOfInterest("point2", 20, 20);
-        repository.save(pointOne);
-        repository.save(pointTwo);
+        testList.add(repository.save(pointOne));
+        testList.add(repository.save(pointTwo));
         int expectedSize = 2;
         int returnedSize = repository.findAll().size();
         Assert.assertEquals(expectedSize, returnedSize);
+
+        saveInRepoEachPointInList(backup);
+
     }
 
     @Test
     public void testFindByNameDontReturnObject() throws Exception {
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
-        repository.save(pointOne);
+        testList.add(repository.save(pointOne));
         List<PointOfInterest> returnedList = repository.findByName("point2");
         int expectedSize = 0;
         int returnedSize = returnedList.size();
@@ -59,7 +78,7 @@ public class PointOfInterestRepositoryTest {
     @Test
     public void testFindByNameReturnsOneObject() throws Exception {
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
-        repository.save(pointOne);
+        testList.add(repository.save(pointOne));
         List<PointOfInterest> returnedList = repository.findByName("point1");
         int expectedSize = 1;
         int returnedSize = returnedList.size();
@@ -73,9 +92,9 @@ public class PointOfInterestRepositoryTest {
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
         PointOfInterest pointTwo = new PointOfInterest("point1", 20, 20);
         PointOfInterest pointThree = new PointOfInterest("point3", 30, 30);
-        repository.save(pointOne);
-        repository.save(pointTwo);
-        repository.save(pointThree);
+        testList.add(repository.save(pointOne));
+        testList.add(repository.save(pointTwo));
+        testList.add(repository.save(pointThree));
         List<PointOfInterest> returnedList = repository.findByName("point1");
         int expectedSize = 2;
         int returnedSize = returnedList.size();
@@ -88,63 +107,78 @@ public class PointOfInterestRepositoryTest {
 
     @Test
     public void testDeleteByNonExistingId() throws Exception {
+
+        List<PointOfInterest> backup = new ArrayList<>();
+        for(PointOfInterest poi : repository.findAll()) backup.add(poi);
+        repository.deleteAll();
+
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
         PointOfInterest pointTwo = new PointOfInterest("point2", 10, 10);
-        repository.save(pointOne);
-        repository.save(pointTwo);
+        testList.add(repository.save(pointOne));
+        testList.add(repository.save(pointTwo));
         UUID idToBeRemoved = UUID.randomUUID();
         repository.delete(idToBeRemoved);
         int expectedListSize = 2;
         int returnedListSize = repository.findAll().size();
         Assert.assertEquals(expectedListSize, returnedListSize);
         Assert.assertEquals(null, repository.findOne(idToBeRemoved));
+
+        saveInRepoEachPointInList(backup);
+
     }
 
     @Test
     public void testDeleteByExistingId() throws Exception {
+
+        List<PointOfInterest> backup = new ArrayList<>();
+        for(PointOfInterest poi : repository.findAll()) backup.add(poi);
+        repository.deleteAll();
+
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
         PointOfInterest pointTwo = new PointOfInterest("point2", 10, 10);
         PointOfInterest pointThree = new PointOfInterest("point3", 30, 30);
-        repository.save(pointOne);
-        repository.save(pointTwo);
-        repository.save(pointThree);
+        testList.add(repository.save(pointOne));
+        testList.add(repository.save(pointTwo));
+        testList.add(repository.save(pointThree));
         UUID idToBeRemoved = pointOne.getId();
         repository.delete(idToBeRemoved);
         int expectedListSize = 2;
         int returnedListSize = repository.findAll().size();
         Assert.assertEquals(expectedListSize, returnedListSize);
         Assert.assertEquals(null, repository.findOne(idToBeRemoved));
+
+        saveInRepoEachPointInList(backup);
+
     }
 
     @Test
     public void savePoint() throws Exception {
         PointOfInterest expectedObject = new PointOfInterest("point1", 10, 10);
-        repository.save(expectedObject);
-        List<PointOfInterest> returnedList = repository.findAll();
-        int expectedListSize = 1;
-        int returnedListSize = returnedList.size();
-        Assert.assertEquals(expectedListSize, returnedListSize);
-        Assert.assertEquals(expectedObject.getName(), returnedList.get(0).getName());
-        Assert.assertEquals(expectedObject.getCoordx(), returnedList.get(0).getCoordx());
-        Assert.assertEquals(expectedObject.getCoordy(), returnedList.get(0).getCoordy());
+        testList.add(repository.save(expectedObject));
+        PointOfInterest returnedObject = repository.findOne(expectedObject.getId());
+        Assert.assertNotNull(returnedObject);
+        Assert.assertEquals(expectedObject.getId(), returnedObject.getId());
+        Assert.assertEquals(expectedObject.getName(), returnedObject.getName());
+        Assert.assertEquals(expectedObject.getCoordx(), returnedObject.getCoordx());
+        Assert.assertEquals(expectedObject.getCoordy(), returnedObject.getCoordy());
     }
 
     @Test(expected = ConstraintViolationException.class)
     public void savePointWithEmptyNameValue() throws Exception {
         PointOfInterest expectedObject = new PointOfInterest("", 10, 10);
-        repository.save(expectedObject);
+        testList.add(repository.save(expectedObject));
     }
 
     @Test(expected = ConstraintViolationException.class)
     public void savePointWithNegativeXValue() throws Exception {
         PointOfInterest expectedObject = new PointOfInterest("point1", -1, 10);
-        repository.save(expectedObject);
+        testList.add(repository.save(expectedObject));
     }
 
     @Test(expected = ConstraintViolationException.class)
     public void savePointWithNegativeYValue() throws Exception {
         PointOfInterest expectedObject = new PointOfInterest("point1", 10, -1);
-        repository.save(expectedObject);
+        testList.add(repository.save(expectedObject));
     }
 
 }
