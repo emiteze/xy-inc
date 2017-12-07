@@ -65,6 +65,16 @@ Point Of Interest object
     "coordy": 10
 }
 ```
+> In order to update a specific point already added to the database, just sent the object you want to update in the same endpoint that saves a new point, but passing the id in the object, as follow:
+```
+Point Of Interest object
+{
+    "id": 5cfd917e-d1c8-48cd-b0a2-072b137cb40a,
+    "name": "Place",
+    "coordx": 10,
+    "coordy": 10
+}
+```
 > ` DELETE /delete-point `
 >
 > Delete a specific Point Of Interest if given "id" via query parameter or the object itself via body request, or a list of Point Of Interest if given "name" via query parameter.
@@ -75,19 +85,6 @@ Point Of Interest object
 >
 > Example: /delete-point?id=5cfd917e-d1c8-48cd-b0a2-072b137cb40a or /delete-point?name="Churrascaria"
 >
-> ` PUT /update-point `
->
-> Update a specific Point Of Interest in the database passing the object with the new values.
->
-> Expeted parameter:
-```
-Point Of Interest object
-{
-    "id": 5cfd917e-d1c8-48cd-b0a2-072b137cb40a,
-    "name": "Place",
-    "coordx": 10,
-    "coordy": 10
-}
 ```
 `PS: All endpoints returns status 200 (ok) if everything goes well and 400 (bad request) if something goes wrong`
 ## Technologies
