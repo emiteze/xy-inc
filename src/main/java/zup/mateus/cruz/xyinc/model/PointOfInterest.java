@@ -2,10 +2,13 @@ package zup.mateus.cruz.xyinc.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.UUID;
 
+@Document(collection = "pointsofinterest")
 public class PointOfInterest implements Serializable{
 
     @Id

@@ -35,22 +35,22 @@ public class PointOfInterestRepositoryTest {
     }
 
     private void saveInRepoEachPointInList(List<PointOfInterest> listOfPoints){
-        for(PointOfInterest poi : listOfPoints){
-            repository.save(poi);
-        }
+        listOfPoints.forEach(point -> {
+            repository.save(point);
+        });
     }
 
     private void deleteInRepoEachPointInList(List<PointOfInterest> listOfPoints){
-        for(PointOfInterest poi : listOfPoints){
-            repository.delete(poi);
-        }
+        listOfPoints.forEach(point -> {
+            repository.delete(point);
+        });
     }
 
     @Test
     public void testFindAllPopulatedDB() throws Exception {
 
         List<PointOfInterest> backup = new ArrayList<>();
-        for(PointOfInterest poi : repository.findAll()) backup.add(poi);
+        backup.addAll(repository.findAll());
         repository.deleteAll();
 
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
@@ -109,7 +109,7 @@ public class PointOfInterestRepositoryTest {
     public void testDeleteByNonExistingId() throws Exception {
 
         List<PointOfInterest> backup = new ArrayList<>();
-        for(PointOfInterest poi : repository.findAll()) backup.add(poi);
+        backup.addAll(repository.findAll());
         repository.deleteAll();
 
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);
@@ -131,7 +131,7 @@ public class PointOfInterestRepositoryTest {
     public void testDeleteByExistingId() throws Exception {
 
         List<PointOfInterest> backup = new ArrayList<>();
-        for(PointOfInterest poi : repository.findAll()) backup.add(poi);
+        backup.addAll(repository.findAll());
         repository.deleteAll();
 
         PointOfInterest pointOne = new PointOfInterest("point1", 10, 10);

@@ -48,7 +48,7 @@ public class PointOfInterestController {
         }
     }
 
-    @RequestMapping(value = "/save-point", method = RequestMethod.POST)
+    @RequestMapping(value = "/save-point", method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseEntity<?> savePoint(@RequestBody PointOfInterest poi){
         try {
             poiService.savePoint(poi);
@@ -58,7 +58,7 @@ public class PointOfInterestController {
         }
     }
 
-    @RequestMapping(value = "/delete-point", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-point", method = {RequestMethod.DELETE, RequestMethod.POST})
     public ResponseEntity<?> deletePoint(@RequestParam(value = "id", required = false) UUID id, @RequestParam(value = "name", required = false) String name, @RequestBody(required = false) PointOfInterest poi){
         try {
             if(id != null){
@@ -76,21 +76,5 @@ public class PointOfInterestController {
         }
         return ResponseEntity.badRequest().build();
     }
-
-    @RequestMapping(value = "/update-point", method = RequestMethod.PUT)
-    public ResponseEntity<?> updatePoint(@RequestBody PointOfInterest poi){
-        try {
-            poiService.updatePoint(poi);
-            return ResponseEntity.ok(poiService.getPoints());
-        } catch(Exception e){
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    /*@RequestMapping(value = "/save-point", method = RequestMethod.POST)
-    public List<PointOfInterest> savePoint(@RequestParam("name") String name, @RequestParam("coordx") int coordx, @RequestParam("coordy") int coordy){
-        poiService.savePoint(new PointOfInterest(name, coordx, coordy));
-        return poiService.getPoints();
-    }*/
 
 }

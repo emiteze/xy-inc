@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zup.mateus.cruz.xyinc.repository.PointOfInterestRepository;
 import zup.mateus.cruz.xyinc.model.PointOfInterest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PointOfInterestService {
@@ -19,10 +19,7 @@ public class PointOfInterestService {
     }
 
     public List<PointOfInterest> getPointsNearby(PointOfInterest userLocation, double maxDistance){
-        List<PointOfInterest> nearbyPoints = new ArrayList<>();
-        for (PointOfInterest poi : this.getPoints()) {
-            if(userLocation.distanceBetweenPoints(poi) <= maxDistance) nearbyPoints.add(poi);
-        }
+        List<PointOfInterest> nearbyPoints = this.getPoints().stream().filter(point -> userLocation.distanceBetweenPoints(point) <= maxDistance).collect(Collectors.toList());
         return nearbyPoints;
     }
 
@@ -36,9 +33,7 @@ public class PointOfInterestService {
 
     public void deleteByName(String name){
         List<PointOfInterest> pointsToBeRemoved = findPointsByName(name);
-        for(PointOfInterest poi : pointsToBeRemoved){
-            repository.delete(poi.getId());
-        }
+        repository.delete(pointsToBeRemoved);
     }
 
     public void deleteObject(PointOfInterest poi) { repository.delete(poi); }
@@ -50,7 +45,5 @@ public class PointOfInterestService {
     public void savePoint(PointOfInterest poi){
         repository.save(poi);
     }
-
-    public void updatePoint(PointOfInterest poi){ repository.save(poi); }
 
 }
