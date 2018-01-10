@@ -7,7 +7,8 @@
 ## Quick Start
 
 > 1.Install [MongoDB](https://www.mongodb.com/download-center), [Java](https://www.java.com/pt_BR/download/) and [Maven](https://maven.apache.org/download.cgi)
-> PS: To see this project in NodeJS, click [here](https://github.com/emiteze/node-xy-inc) 
+
+PS: To see this project in NodeJS, click [here](https://github.com/emiteze/node-xy-inc) 
 >
 > 2.Clone this repository using ` git clone https://github.com/emiteze/xy-inc.git `
 >
