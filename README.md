@@ -85,8 +85,8 @@ Point Of Interest object
 >
 > Example: /delete-point?id=5cfd917e-d1c8-48cd-b0a2-072b137cb40a or /delete-point?name="Churrascaria"
 >
-```
-`PS: All endpoints returns status 200 (ok) if everything goes well and 400 (bad request) if something goes wrong`
+PS: All endpoints returns status 200 (ok) if everything goes well and 400 (bad request) if something goes wrong`
+
 ## Technologies
 
 > Backend
