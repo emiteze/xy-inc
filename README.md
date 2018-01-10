@@ -2,17 +2,18 @@
 
 ## Introduction
 
-> XY Inc. is a company specializing in the production of excellent GPS receivers (Global Positioning System) and this project was developed to maintain a backend for their new brand system, which intends to help people locate Points of Interest (POI).
+> XY Inc. is a company specializing in the production of excellent GPS receivers (Global Positioning System) and this project was developed to maintain a backend for their new brand system, which intends to help people locate Points of Interest (POI). 
 
 ## Quick Start
 
 > 1.Install [MongoDB](https://www.mongodb.com/download-center), [Java](https://www.java.com/pt_BR/download/) and [Maven](https://maven.apache.org/download.cgi)
+> PS: To see this project in NodeJS, click [here](https://github.com/emiteze/node-xy-inc) 
 >
 > 2.Clone this repository using ` git clone https://github.com/emiteze/xy-inc.git `
 >
 > 3.On the root of the project, run:
 >
-> ``` mkdir data && mkdir data/db (this create the project database path used by mongo to store data) ```
+> ``` mkdir data && mkdir data/db (this creates the project database path used by mongo to store data) ```
 >
 > ``` mongod --dbpath=data/db (this will initiate a mongodb server at localhost:27017) ```
 >
